@@ -1,270 +1,167 @@
-%% CV_DPN.tex — Dipayan Sarkar
-\documentclass[11pt, a4paper]{moderncv}
+%% CV_DPN.tex - Dipayan Sarkar - ONE-PAGE INDUSTRY RESUME (research scientist roles)
+%%
+%% Branch: cv_1pg. This file deliberately does NOT use moderncv.
+%% moderncv's \cvitem reserves ~0.25\textwidth for the label column and its vertical
+%% rhythm is tuned for multi-page academic CVs; neither survives a one-page budget.
+%% The academic moderncv version lives on CV_main / cv_classic - keep edits separate.
+%%
+%% Content excluded for length is COMMENTED OUT IN PLACE, not deleted, so it can be
+%% switched back on without going hunting through git history.
 
-% \moderncvstyle{classic}
-\moderncvstyle{banking}   % or casual, fancy, oldstyle
-% \moderncvstyle{casual}   % or casual, fancy, oldstyle
-% \moderncvstyle{fancy}   % or casual, fancy, oldstyle
-% \moderncvstyle{oldstyle}   % or casual, fancy, oldstyle
+\documentclass[a4paper,10pt]{article}
 
-
-\moderncvcolor{black}
-% \moderncvcolor{orange}    % or green, red, purple, grey, black
-
-% Force first name and last name to the same color (keep last name bold)
-\renewcommand*{\firstnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{black}#1}}
-\renewcommand*{\lastnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{black}#1}}
-
-% Add vertical space between the name and the address/contact links in the header
-\makeatletter
-\patchcmd{\makehead}{\\\addressfont\color{addresscolor}}{\\[1em]\addressfont\color{addresscolor}}{}{%
-  \PackageWarning{CV_DPN}{Could not patch \string\makehead\space for name spacing}}
-\makeatother
-
-% \renewcommand{\namefont}{\Huge\bfseries\color{black}}
-% \renewcommand{\titlefont}{\large\mdseries\upshape\color{black}}
-
-\usepackage[scale=0.85, top=1.8cm, bottom=1.5cm]{geometry}
-\usepackage{multicol}
-\usepackage{lastpage}   % reliable \pageref{LastPage}; moderncv's own lastpage label never fires here
-% \usepackage{mathptmx}   # times new roman font
-% \usepackage{palatino}                                         
-% \usepackage{fontspec}   
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-% fontawesome icons are provided by moderncv (fontawesome6); do not load fontawesome5 (clashes)
-\newcommand{\huggingfaceicon}{\raisebox{-0.2em}{\includegraphics[height=0.99em]{hf_logo.png}}}
+\usepackage[margin=1.15cm,bottom=1.0cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}     % squeezes lines slightly; helps the one-page fit
 
-% moderncv's banking style header (moderncvheadiii) does not implement \photo at all,
-% so the photo is placed manually as a page-1-only absolute overlay in the top-right
-% margin (outside the centered 0.8\textwidth header block) rather than via \photo.
-\usepackage{tikz}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\definecolor{rule}{gray}{0.55}
 
+% Hugging Face has no icon font; reuse the tracked logo bitmap (same asset as CV_main).
+\newcommand{\hficon}{\raisebox{-0.2em}{\includegraphics[height=0.95em]{hf_logo.png}}}
 
-% Personal inf
-\name{Dipayan}{Sarkar}
-\address{Department of Bioinformatics, University of North Bengal}{Siliguri - 734013, West Bengal, India.}{}
-\phone[mobile]{+91 9735490241}
-\email{dipayanskr@gmail.com}
-\homepage{dipayansarkar.com}
-\social[github][github.com/dipayanskr]{github.com/dipayanskr}
-\social[googlescholar][scholar.google.com/citations?user=K-zTRIEAAAAJ&hl=en]{Google Scholar}
-% \social[linkedin][www.linkedin.com/in/dipayan-sarkar-b5a281179]{dipayansarkar}
-\social[orcid][orcid.org/0000-0002-0765-5689]{0000-0002-0765-5689}
-\extrainfo{%
-  \emailsymbol\emaillink{rs\_dipayans@nbu.ac.in}%
-  \makeheaddetailssymbol
-  \huggingfaceicon~\href{https://huggingface.co/dipayanskr}{huggingface.co/dipayanskr}%
-}
+% ---------- section styling: small-caps, hairline rule, tight vertical budget ----------
+\titleformat{\section}{\normalsize\bfseries\scshape}{}{0em}{}[\vspace{-0.55em}{\color{rule}\rule{\linewidth}{0.4pt}}]
+\titlespacing*{\section}{0pt}{0.85ex plus .1ex minus .1ex}{0.6ex}
 
-
-
-
-
-
-
-
-
+% ---------- entry helpers ----------
+% \entry{role}{org}{location}{dates}
+\newcommand{\entry}[4]{%
+  \textbf{#1}, #2\hfill{\small #3\ \textbar\ #4}\par\vspace{0.15em}}
+% \skillrow{label}{content} - fixed narrow label column, far tighter than moderncv's
+\newcommand{\skillrow}[2]{\parbox[t]{0.155\linewidth}{\textbf{#1}}\parbox[t]{0.84\linewidth}{#2}\par\vspace{0.2em}}
+% \softrow - wider label column + ragged right; the software entries end in long
+% monospace URLs that justification stretches into visible rivers.
+\newcommand{\softrow}[2]{\parbox[t]{0.21\linewidth}{\textbf{#1}}\hspace{0.015\linewidth}\parbox[t]{0.775\linewidth}{\raggedright #2}\par\vspace{0.2em}}
+\setlist[itemize]{leftmargin=1.1em,topsep=0.15em,itemsep=0.12em,parsep=0pt,label=\textbullet}
 
 % ======================================================================
 \begin{document}
 
-% \begin{tikzpicture}[overlay, remember picture]
-%   \node[anchor=north east, xshift=-1cm, yshift=-1.6cm, draw=black!40, line width=0.4pt, inner sep=0pt] at (current page.north east) {\includegraphics[width=2.3cm]{Photo/dpn_photo.jpg}};
-% \end{tikzpicture}
+% ---------- Header ----------
+{\centering
+{\fontsize{22}{24}\selectfont\bfseries Dipayan Sarkar}\\[0.45em]
+{\small
+\faEnvelope[regular]~\href{mailto:dipayanskr@gmail.com}{dipayanskr@gmail.com} \textbullet\
+\faPhone*~+91 9735490241 \textbullet\
+\faGlobe~\href{https://dipayansarkar.com}{dipayansarkar.com} \textbullet\
+\faGithub~\href{https://github.com/dipayanskr}{github.com/dipayanskr}\\[0.25em]
+\faGraduationCap~\href{https://scholar.google.com/citations?user=K-zTRIEAAAAJ&hl=en}{Google Scholar} \textbullet\
+\faOrcid~\href{https://orcid.org/0000-0002-0765-5689}{0000-0002-0765-5689} \textbullet\
+\hficon~\href{https://huggingface.co/dipayanskr}{huggingface.co/dipayanskr}
+}\par}
+\vspace{0.5em}
 
-\makecvtitle
+% Institutional address dropped for the industry one-pager (not useful to a hiring team).
+% Restore by uncommenting:
+% {\centering\small Department of Bioinformatics, University of North Bengal, Siliguri - 734013, West Bengal, India.\par}
+%
+% Second/institutional email also dropped here:
+% \faEnvelope[regular]~\href{mailto:rs_dipayans@nbu.ac.in}{rs\_dipayans@nbu.ac.in}
+%
+% Photo overlay from CV_main is intentionally absent - industry resumes in this market
+% read cleaner without one, and it costs ~2.5cm of the page budget.
 
-% Running footer: name (left) + page number (right) on continuation pages only.
-% moderncv puts its page number inside \fancypagestyle{plain}, so both fields must be
-% redefined together here -- a bare \fancyfoot[l] would drop the page number.
-\fancypagestyle{plain}{%
-  \fancyhf{}%
-  \fancyfoot[l]{\ifnum\value{page}>1\relax
-    \color{color2}\pagenumberfont\strut Dipayan Sarkar\fi}%
-  \fancyfoot[r]{\color{color2}\pagenumberfont\strut\thepage/\protect\NoHyper\pageref{LastPage}\protect\endNoHyper}%
-}
-\pagestyle{plain}
+% ---------- Summary ----------
+\section{Summary}
+Computational biologist and deep learning researcher building sequence-based models for
+protein interaction and design. Author of four papers on attention-based PPI prediction,
+uncertainty calibration, and generative protein binder design, and sole developer of three
+deployed model-backed web platforms serving trained models in production. Comfortable owning
+the full path from architecture and large-scale GPU/TPU training through to inference APIs
+and deployment.
 
-% ---------- Research Summary ----------
-\section{Research Summary}
-\cvitem{}{%
-	PhD researcher in bioinformatics and computational biology developing deep learning methods for protein sequence modeling. Work spans sequence-based protein-protein interaction prediction using attention-based architectures with transfer learning from pretrained protein language models, generative modeling of protein binders through autoregressive and diffusion-based approaches. Also builds web platforms that make trained models usable for inference and interaction-network visualization.
-	% Ongoing exploration includes LLM fine-tuning, reinforcement learning for sequence optimization, and discrete diffusion for biological sequence generation.
-}
+% ---------- Skills ----------
+\section{Skills}
+\skillrow{Languages}{Python, R, C, Bash, \LaTeX}
+\skillrow{ML / DL}{PyTorch, Transformers \& attention architectures, transfer learning, pre-training \& finetuning, autoregressive generative models, uncertainty calibration, mixture-of-experts}
+\skillrow{Scale}{Multi-GPU and HPC training, NVIDIA L4 / A100, Google Cloud TPU (v4, v5e, v6e)}
+\skillrow{Domain}{Protein language models, protein--protein interaction \& biomolecular networks, de novo binder design, biological sequence analysis}
+\skillrow{Data}{NumPy, Pandas, scikit-learn, Matplotlib, Seaborn}
+\skillrow{Engineering}{Docker, FastAPI, Flask, Nginx, Linux server deployment, Git, GitHub Actions, \texttt{uv}, Conda}
 
-% ---------- Work Experience ----------
+% ---------- Experience ----------
+\section{Experience}
+\entry{PhD Research Scholar}{Department of Bioinformatics, University of North Bengal}{Siliguri, India}{2022--Present}
+\begin{itemize}
+  \item Designed a transfer-learning hybrid attention architecture for sequence-based protein--protein interaction prediction, published in \textit{BBA -- Proteins and Proteomics}; released as a public web server.
+  \item Built an uncertainty-aware calibrated ensemble for PPI network prediction in \textit{Arabidopsis thaliana}, targeting reliable confidence estimates rather than raw accuracy alone.
+  \item Developed a sparse mixture-of-experts autoregressive generative model for de novo protein binder design.
+  \item Shipped and maintain three model-backed web platforms (Docker + FastAPI/Flask + Nginx) providing inference and interaction-network visualisation to external users.
+\end{itemize}
+
+% ---------- Software ----------
+\section{Deployed Research Software}
+\softrow{Deep-Interact Studio}{Web platform to build, train, and compare deep learning models for protein--protein, drug--target, RNA--protein, and protein--DNA interaction prediction, with integrated interpretability. \href{https://deepinteract.compbiosysnbu.in/}{\texttt{deepinteract.compbiosysnbu.in}}}
+\softrow{AttnSeq-PPI}{Deep learning protein--protein interaction prediction server. \href{https://attnseqppi.compbiosysnbu.in/}{\texttt{attnseqppi.compbiosysnbu.in}}}
+\softrow{EGRNi}{R package on CRAN (v0.1.6) for ensemble gene regulatory network inference. \href{https://cran.r-project.org/package=EGRNi}{\texttt{cran.r-project.org/package=EGRNi}}}
+
+% \softrow{ARACoFusion-PPI}{Arabidopsis-specific PPI prediction and network analysis tool. \href{https://aracofusion.compbiosysnbu.in/}{\texttt{aracofusion.compbiosysnbu.in}}}
+
+% ---------- Publications ----------
+\section{Selected Publications}
+\begin{itemize}[leftmargin=0pt,itemindent=0pt,label={}]
+  \item \textbf{Sarkar, D.}, \& Sarkar, C. (2025). AttnSeq-PPI: Enhancing protein--protein interaction network prediction using transfer learning-driven hybrid attention. \textit{BBA -- Proteins and Proteomics}, 1874(1), 141102. \href{https://doi.org/10.1016/j.bbapap.2025.141102}{doi:10.1016/j.bbapap.2025.141102}
+  \item \textbf{Sarkar, D.}, \& Sarkar, C. (2026). MoE-Bind: Guiding de novo protein binder generation with sparse experts. \textit{bioRxiv}. \href{https://www.biorxiv.org/content/10.64898/2026.06.13.732043v1}{doi:10.64898/2026.06.13.732043}
+  \item \textbf{Sarkar, D.}, \& Sarkar, C. (2026). ARACoFusion: Uncertainty-aware calibrated deep learning for PPI network prediction in \textit{Arabidopsis thaliana}. \textit{bioRxiv}. \href{https://www.biorxiv.org/content/10.64898/2026.05.22.727120v1}{doi:10.64898/2026.05.22.727120}
+  \item \textbf{Sarkar, D.}, Bardhan, K., \& Sarkar, C. (2026). Deep-Interact Studio: An interactive deep learning model building platform for biomolecular interaction prediction. \textit{bioRxiv}. \href{https://www.biorxiv.org/content/10.64898/2026.07.02.736034v1}{doi:10.64898/2026.07.02.736034}
+\end{itemize}
 
 % ---------- Education ----------
 \section{Education}
+\entry{Ph.D. in Bioinformatics}{University of North Bengal}{India}{Expected submission 2027}
+{\small Deep learning frameworks for predicting protein--protein interaction networks from protein sequences. Supervisor: Dr.\ Chiranjib Sarkar.}\par\vspace{0.25em}
+\entry{M.Sc. in Botany (Specialisation: Biochemistry)}{University of North Bengal}{India}{2021}
+{\small 77.25\% -- First Class.}
 
-\cventry{Expected Submission 2027}{Ph.D. in Bioinformatics}{University of North Bengal, Department of Bioinformatics.}{India}{}{%
-	Supervisor: Dr.\ Chiranjib Sarkar, Assistant Professor, Department of Bioinformatics.\\
-	Focus: Framework Development for Predicting Protein-Protein Interaction Networks Using Deep Learning Algorithms on Protein Sequences.
-}
+% B.Sc. dropped for space; uncomment to restore:
+% \par\vspace{0.25em}
+% \entry{B.Sc. (Hons.) in Botany}{Ananda Chandra College, University of North Bengal}{India}{2019}
+% {\small 63.50\% -- First Class.}
+%
+% M.Sc. dissertation title dropped (not relevant to industry ML roles):
+% Dissertation: ``A review on the responses of aquatic macrophytes to phenolic compounds
+% with special reference to their tolerance strategies and future implications.''
+% Supervisor: Dr. Swarnendu Roy, Assistant Professor, Department of Botany.
+%
+% Schooling entries (Class X / XII) remain excluded, as on the academic CV.
 
-\cventry{2021}{M.Sc. in Botany}{University of North Bengal, Department of Botany.}{India}{77.25\% - First Class}{%
-	Specialization: Biochemistry.\\
-	Dissertation: ``A review on the responses of aquatic macrophytes to phenolic compounds with special reference to their tolerance strategies and future implications.''\\
-	Supervisor: Dr.\ Swarnendu Roy, Assistant Professor, Department of Botany.
-}
+% ---------- Awards ----------
+\section{Awards \& Compute Grants}
+\begin{itemize}[leftmargin=0pt,itemindent=0pt,label={}]
+	\item \textbf{CSIR-UGC NET with JRF}, Life Sciences (2021) -- All India Rank 216. \textbullet\ \textbf{GATE} Life Sciences (XL), qualified (2022).
+	\item \textbf{IndiaAI Compute Initiative} (2025) -- awarded NVIDIA L4 GPU cloud compute under the IndiaAI Mission for deep learning-based PPI network prediction (Sep 2025 -- Aug 2026).
+	\item \textbf{Google TPU Research Cloud (TRC)} (2025) -- awarded Cloud TPU access (v4, v5e, v6e) for machine learning research.
+\end{itemize}
 
-\cventry{2019}{B.Sc. (Hons.) in Botany}{Ananda Chandra College, University of North Bengal}{India}{63.50\% - First Class}{}
-
-% \cventry{2016}{Higher Secondary (Class XII)}{Haldibari High School (H.S.)}{West Bengal}{80.00\% -- First Class}{%
-%   WBCHSE | Subjects: Physics, Chemistry, Mathematics, Biology, English, Bengali
-% }
-
-% \cventry{2014}{Secondary (Class X)}{Haldibari High School (H.S.)}{West Bengal}{91.58\% -- First Class}{%
-%   WBBSE | Subjects: Mathematics, Physical Science, Life Science, History, Geography, English, Bengali
-% }
-
-\section{Research Experience}
-
-\cventry{2022--Present}{PhD Research Scholar}{Department of Bioinformatics, University of North Bengal}{Siliguri, India}{}{%
-	Department of Bioinformatics
-	\begin{itemize}
-		\item[\textbullet] Deep learning architectures for sequence-based protein-protein interaction prediction using Attention-based hybrid architecture with transfer learning.
-		\item[\textbullet] Sequence based generative modeling of protein binder generation using autoregressive approaches.
-		\item[\textbullet] Development of web-based platforms for model inference and protein interaction network visualization
-	\end{itemize}
-}
-
-
-
-
-% ---------- Publications ----------
-\section{Publications}
-
-\cvitem{2025}{%
-	\textbf{Sarkar, D.}, \& Sarkar, C. \textbf{AttnSeq-PPI}: Enhancing protein-protein interaction network prediction using transfer learning-driven hybrid attention. \textbf{\textit{Biochimica et Biophysica Acta (BBA)---Proteins and Proteomics}}, \textbf{1874}(1), 141102. \href{https://doi.org/10.1016/j.bbapap.2025.141102}{doi:10.1016/j.bbapap.2025.141102}
-}
-\cvitem{2026}{%
-	\textbf{Sarkar, D.}, \& Sarkar, C. \textbf{ARACoFusion}: Uncertainty-aware calibrated deep learning for protein-protein interaction network prediction in \textit{Arabidopsis thaliana}. \textbf{bioRxiv} preprint. \href{https://www.biorxiv.org/content/10.64898/2026.05.22.727120v1}{doi:10.64898/2026.05.22.727120}
-}
-
-\cvitem{2026}{%
-\textbf{Sarkar, D.}, \& Sarkar, C. \textbf{MoE-Bind}: Guiding De Novo Protein Binder Generation with Sparse Experts. \textbf{bioRxiv} preprint. \href{https://www.biorxiv.org/content/10.64898/2026.06.13.732043v1}{doi:10.64898/2026.06.13.732043}
-}
-
-\cvitem{2026}{%
-	\textbf{Sarkar, D.}, Bardhan, K., \& Sarkar, C. \textbf{Deep-Interact Studio}: An Interactive Deep Learning Model Building Platform for Biomolecular Interaction Prediction. \textbf{bioRxiv} preprint. \href{https://www.biorxiv.org/content/10.64898/2026.07.02.736034v1}{doi:10.64898/2026.07.02.736034}
-}
-
-
-
-
-
-% ---------- Skills ----------
-% \newpage
-
-% ---------- Software & Tools ----------
-\section{Research Software Developed}
-
-\subsection{Web Servers}
-
-\cvitem{Deep-Interact Studio}{%
-	Interactive web platform for building, training, and comparing custom deep learning models for protein--protein, drug--target, RNA--protein, and protein--DNA interaction prediction, with integrated interpretability.
-	\newline\href{https://deepinteract.compbiosysnbu.in/}{\texttt{deepinteract.compbiosysnbu.in}}
-}
-
-\cvitem{AttnSeq-PPI}{%
-	Deep learning-based protein--protein interaction prediction platform.
-	\newline\href{https://attnseqppi.compbiosysnbu.in/}{\texttt{attnseqppi.compbiosysnbu.in}}
-}
-
-% \cvitem{ARACoFusion-PPI}{%
-%   Arabidopsis-specific PPI prediction and network analysis tool.
-%   \newline\href{https://aracofusion.compbiosysnbu.in/}{\texttt{aracofusion.compbiosysnbu.in/}}
-% }
-
-\subsection{Packages}
-
-\cvitem{EGRNi}{%
-	R package for ensemble gene regulatory network inference, combining multiple inference
-	methods to improve reconstruction accuracy of gene regulatory networks.
-	\newline Sarkar, C., \textbf{Sarkar, D.}, Parsad, R., \& Mishra, D. \textit{CRAN}, v0.1.6
-	\newline\href{https://cran.r-project.org/package=EGRNi}{\texttt{cran.r-project.org/package=EGRNi}}
-}
-
-% ---------- Teaching & Mentoring ----------
+% ---------- Excluded sections (kept for reactivation) ----------
+%
+% \section{Talks \& Presentations}
+% \begin{itemize}[leftmargin=0pt,itemindent=0pt,label={}]
+%   \item \textbf{A Webtool for Transfer Learning Based Protein-Protein Interaction Network
+%   Prediction Using Hybrid Attention} -- Oral presentation, \textit{Anusandhan 2025}
+%   (SARANSH, Wiley-sponsored), Bose Institute, Kolkata, India, 7 March 2025.
+% \end{itemize}
+%
 % \section{Teaching \& Mentoring}
-
-% \cvitem{2022-2024}{%
-% 	\textbf{M.Sc. Bioinformatics (CBCS)} - University of North Bengal. Independent theory and laboratory instruction in three papers (9 credits), as assigned by the course in-charge:
-% 	\begin{itemize}
-% 		\item[\textbullet] \textit{Basic Computer Applications} (Core, theory and practical, 4 cr; Sem.\ I, 2022-23 \& 2023-24)
-% 		\item[\textbullet] \textit{Computer Programming for Bioinformatics} (Core, theory and practical, 4 cr; Sem.\ II, 2022-23)
-% 		\item[\textbullet] \textit{Basic Mathematics and Statistics for Biology} (DSE practical, 1 cr; Sem.\ I, 2022-23 \& 2023-24)
-% 	\end{itemize}
-% }
-
-% \cvitem{2025}{%
-% 	\textbf{Dissertation mentoring} - mentoring of an M.Sc. Bioinformatics dissertation student (Central University of South Bihar) on \textit{Deep Learning-Based Model for Prediction of Targeted Sequencing Depth Using Probe Sequences}; submitted May 2025.
-% }
-
-\section{Skills}
-
-\cvitem{Programming}{Python (PyTorch), R, C }
-\cvitem{Deep Learning}{Transformers, attention mechanisms, transfer learning, pre-training and finetuning.}
-\cvitem{Generative AI}{Autoregressive generative models for de novo protein and protein binder design.}
-\cvitem{Scalable Training}{GPU-based training, parallel training on HPC environments}
-\cvitem{Bioinformatics}{Biological sequence analysis, protein-protein interaction and biomolecular network prediction.}
-\cvitem{Scientific Computing}{NumPy, Pandas, Matplotlib, Seaborn.}
-\cvitem{Deployment}{Nginx, Docker, Flask, FastAPI, Linux server deployment, model-backed web applications.}
-\cvitem{Tooling}{Git, GitHub Actions (CI), \texttt{uv}, Conda.}
-
-
-% ---------- Talks & Presentations ----------
-\section{Talks \& Presentations}
-
-\cvitem{2025}{%
-	\textbf{A Webtool for Transfer Learning Based Protein-Protein Interaction Network Prediction Using Hybrid Attention} - Oral presentation, \textit{Anusandhan 2025} (SARANSH, Wiley-sponsored), Bose Institute, Kolkata, India, 7 March 2025.
-}
-
-
-% ---------- Awards & Certificates ----------
-\section{Awards}
-
-% \cvitem{2021}{%
-%   Qualified \textbf{CSIR-NET (JRF)} in Life Sciences - June 2021, \textbf{All India Rank: 216}
-% }
-\cvitem{2021}{%
-	\textbf{CSIR-UGC NET with JRF}, Life Sciences - June 2021
-	\newline\textit{All India Rank 216 \ $\vert$ \ Junior Research Fellowship, CSIR-HRDG, Government of India}
-}
-\cvitem{2022}{%
-	Qualified \textbf{GATE} (Graduate Aptitude Test in Engineering) - Life Sciences (XL)
-}
-
-% \section{Fellowships}
-% \cvitem{2021}{%
-% 	\textbf{CSIR-UGC Junior Research Fellowship (JRF)} - Council of Scientific \& Industrial Research, Government of India. Awarded on qualifying CSIR-UGC NET (Life Sciences, June 2021).
-% }
-
-% ---------- Grants & Computing Resources ----------
-\section{Grants \& Computing Resources}
-
-% \cvitem{2025}{%
-% 	\textbf{IndiaAI Compute Initiative} - Awarded GPU cloud compute (NVIDIA L4) under the IndiaAI Mission for the project \textit{Deep learning-based framework for protein-protein interaction network prediction} (Project ID: P1-S2025070964, Sep 2025 -- Aug 2026). Funded under CSIR-UGC SRF Fellowship.
-% }
-% \cvitem{2025}{%
-% 	\textbf{Google TRC (TPU Research Cloud) Award} - Granted free access to Google Cloud TPUs (v4, v5e, v6e) for machine learning research.
-% }
-\cvitem{2025}{%
-	\textbf{IndiaAI Compute Initiative} - Awarded GPU cloud compute (NVIDIA L4 GPU) under the IndiaAI Mission for the project \textit{Deep learning-based framework for protein-protein interaction network prediction} (Project ID: P1-S2025070964, Sep 2025 - Aug 2026).
-}
-\cvitem{2025}{%
-	\textbf{Google TRC (TPU Research Cloud) Award} - Awarded access to GCP - TPUs (v4, v5e, v6e) for machine learning research.
-}
-
-
-
-% #############
-
-
-% #############
-% #############
-
-
+% \begin{itemize}[leftmargin=0pt,itemindent=0pt,label={}]
+%   \item \textbf{M.Sc. Bioinformatics (CBCS)}, University of North Bengal (2022-2024) --
+%   independent theory and laboratory instruction across three papers (9 credits):
+%   Basic Computer Applications (4 cr), Computer Programming for Bioinformatics (4 cr),
+%   Basic Mathematics and Statistics for Biology (1 cr).
+%   \item \textbf{Dissertation mentoring} (2025) -- mentored an M.Sc. Bioinformatics
+%   dissertation student (Central University of South Bihar) on \textit{Deep Learning-Based
+%   Model for Prediction of Targeted Sequencing Depth Using Probe Sequences}; submitted May 2025.
+% \end{itemize}
 
 \end{document}
