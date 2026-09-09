@@ -1,8 +1,8 @@
 %% CV_DPN.tex — Dipayan Sarkar
 \documentclass[11pt, a4paper]{moderncv}
 
-% \moderncvstyle{classic}
-\moderncvstyle{banking}   % or casual, fancy, oldstyle
+\moderncvstyle{classic}
+% \moderncvstyle{banking}   % or casual, fancy, oldstyle
 % \moderncvstyle{casual}   % or casual, fancy, oldstyle
 % \moderncvstyle{fancy}   % or casual, fancy, oldstyle
 % \moderncvstyle{oldstyle}   % or casual, fancy, oldstyle
@@ -20,6 +20,11 @@
 \patchcmd{\makehead}{\\\addressfont\color{addresscolor}}{\\[1em]\addressfont\color{addresscolor}}{}{%
   \PackageWarning{CV_DPN}{Could not patch \string\makehead\space for name spacing}}
 \makeatother
+
+% \makeheaddetailssymbol (used inside \extrainfo below) is only defined by the
+% casual/banking header variants; provide a fallback bullet separator for styles
+% (classic, oldstyle, fancy, contemporary) whose header files don't define it.
+\providecommand{\makeheaddetailssymbol}{\hspace{1em}{\rmfamily\textbullet}\hspace{1em}}
 
 % \renewcommand{\namefont}{\Huge\bfseries\color{black}}
 % \renewcommand{\titlefont}{\large\mdseries\upshape\color{black}}
@@ -47,7 +52,7 @@
 \email{dipayanskr@gmail.com}
 \homepage{dipayansarkar.com}
 \social[github][github.com/dipayanskr]{github.com/dipayanskr}
-\social[googlescholar][scholar.google.com/citations?user=K-zTRIEAAAAJ&hl=en]{Google Scholar}
+\social[googlescholar][scholar.google.com/citations?user=K-zTRIEAAAAJ]{Google Scholar}
 % \social[linkedin][www.linkedin.com/in/dipayan-sarkar-b5a281179]{dipayansarkar}
 \social[orcid][orcid.org/0000-0002-0765-5689]{0000-0002-0765-5689}
 \extrainfo{%
@@ -68,9 +73,7 @@
 % ======================================================================
 \begin{document}
 
-% \begin{tikzpicture}[overlay, remember picture]
-%   \node[anchor=north east, xshift=-1cm, yshift=-1.6cm, draw=black!40, line width=0.4pt, inner sep=0pt] at (current page.north east) {\includegraphics[width=2.3cm]{Photo/dpn_photo.jpg}};
-% \end{tikzpicture}
+
 
 \makecvtitle
 
