@@ -34,6 +34,11 @@
 % fontawesome icons are provided by moderncv (fontawesome6); do not load fontawesome5 (clashes)
 \newcommand{\huggingfaceicon}{\raisebox{-0.2em}{\includegraphics[height=0.99em]{hf_logo.png}}}
 
+% moderncv's banking style header (moderncvheadiii) does not implement \photo at all,
+% so the photo is placed manually as a page-1-only absolute overlay in the top-right
+% margin (outside the centered 0.8\textwidth header block) rather than via \photo.
+\usepackage{tikz}
+
 
 % Personal inf
 \name{Dipayan}{Sarkar}
@@ -62,6 +67,10 @@
 
 % ======================================================================
 \begin{document}
+
+% \begin{tikzpicture}[overlay, remember picture]
+%   \node[anchor=north east, xshift=-1cm, yshift=-1.6cm, draw=black!40, line width=0.4pt, inner sep=0pt] at (current page.north east) {\includegraphics[width=2.3cm]{Photo/dpn_photo.jpg}};
+% \end{tikzpicture}
 
 \makecvtitle
 
